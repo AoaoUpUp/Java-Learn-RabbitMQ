@@ -24,7 +24,7 @@ public class MessageReceiver {
         } catch (Exception e) {
             try {
                 System.err.println("消息处理失败，拒绝消息：" + new String(message.getBody()));
-                // 拒绝消息，并且不重新放回队列
+                // 拒绝消息，并且不重新放回队列 而且发送到死信队列
                 channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
                 //第一个 false：表示只拒绝当前消息
                 //第二个 false：表示不重新放回队列，丢弃消息（如果设为 true，消息会重新进入队列）。
